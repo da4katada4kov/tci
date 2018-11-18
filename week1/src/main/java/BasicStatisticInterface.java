@@ -50,7 +50,7 @@ public interface BasicStatisticInterface {
     Double getMean() throws NoDataItemsException;
 
     /**
-     * calculates the Mean of the data items
+     * calculates the Median of the data items
      * returns NoDataItemsException when there are no data items to calculate on.
      *
      * @return median value of data items

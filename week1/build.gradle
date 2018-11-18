@@ -14,5 +14,5 @@ repositories {
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
     compile group: 'pl.pragmatists', name: 'JUnitParams', version: '1.0.4'
-    compile 'org.hamcrest:hamcrest-junit:2.0.0.0'
+    compile 'org.hamcrest:hamcrest-all:1.3'
 }
