@@ -1,7 +1,36 @@
+import junitparams.JUnitParamsRunner;
+import junitparams.Parameters;
 import org.junit.*;
+import org.junit.runner.RunWith;
+
+import java.util.Arrays;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+
+@RunWith(JUnitParamsRunner.class)
 public class BasicStatisticTest {
+
+    static class TestParameters{
+        public Double[] caseValues;
+        public Double expectedResult;
+        public TestParameters(Double[] params, Double expectedResult){
+            this.caseValues = params;
+            this.expectedResult =expectedResult;
+        }
+        @Override
+        public String toString(){
+            String tostr = "Expected: " + expectedResult + "\n values: { ";
+
+            for (int i = 0; i < caseValues.length; i++) {
+                tostr += caseValues[i];
+                if (i!=caseValues.length-1) tostr+=", ";
+            }
+
+            return tostr + " }";
+        }
+
+    }
 
     private BasicStatistic sut;
 
@@ -74,14 +103,26 @@ public class BasicStatisticTest {
         Double result = sut.getMean();
     }
 
+    private static final TestParameters[] getMeanCases() {
+        return new TestParameters[] {
+                new TestParameters(new Double[] {1.0, 2.0, 3.0}, 2.0),
+                new TestParameters(new Double[] {1.1, 2.2, 3.3}, 2.2),
+                new TestParameters(new Double[] {2.2, 3.3, 4.4}, 3.3),
+                new TestParameters(new Double[] {1.1, 2.2, 3.3,4.4,5.5}, 3.3),
+                new TestParameters(new Double[] {111.111, 222.222, 333.333}, 222.222),
+
+        };
+    }
     @Test
-    public void test_getMean_ShouldReturnTheAverageValue() throws NoDataItemsException {
-        Double average = 2.0;
-        sut.addDoubleToData(1.0);
-        sut.addDoubleToData(2.0);
-        sut.addDoubleToData(3.0);
+    @Parameters(method = "getMeanCases")
+    public void test_getMean_ShouldReturnTheAverageValue(TestParameters parameters) throws NoDataItemsException {
+        System.out.println(parameters);
+        for (Double d :
+                parameters.caseValues) {
+            sut.addDoubleToData(d);
+        }
         Double result = sut.getMean();
-        assertThat("The returned value was not the correct average.", result, equalTo(average));
+        assertThat("The returned value was not the correct average.", 0.00000001, greaterThan(Math.abs(result-parameters.expectedResult)));
     }
 
     @Test(expected = NoDataItemsException.class)
