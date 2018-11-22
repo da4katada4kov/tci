@@ -16,7 +16,9 @@ public class School {
         this.courses = new ArrayList<>();
     }
 
-    public void addCourse(Course course){
+    public void addCourse(Course course) throws CourseException, DuplicateCourseException {
+        if(course.getStartDate().before(this.openDate)) throw new CourseException();
+        if (courses.stream().anyMatch((c -> c.getName().equals(c.getName())))) throw new DuplicateCourseException();
         courses.add(course);
     }
 

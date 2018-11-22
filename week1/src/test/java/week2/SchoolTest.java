@@ -1,9 +1,8 @@
 package week2;
 
 import org.junit.*;
-import org.junit.rules.TestName;
-import org.junit.runner.RunWith;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -38,12 +37,29 @@ public class SchoolTest {
     }
 
     @Test
-    public void test_School_addCourseShouldInsertACourseToTheSchool() throws CourseDateException {
+    public void test_add_courseShouldInsertACourseToTheSchool() throws CourseDateException, CourseException, DuplicateCourseException {
         sut = new School(name, openDate);
         assertThat(sut.getOpenDate(), equalTo(openDate));
         Course valid = new Course(courseName,validStartDate,validEndDate);
 
         sut.addCourse(valid);
         assertThat(sut.getCourses().size(), equalTo(1));
+    }
+
+    @Test(expected = CourseException.class)
+    public void test_add_courseWithStartDateBeforeSchoolOpenDateShouldThrowCourseException() throws CourseDateException, CourseException, DuplicateCourseException {
+        Course invalidCourse = new Course(courseName,earliestDate, validEndDate);
+
+        sut = new School(name, openDate);
+        sut.addCourse(invalidCourse);
+    }
+
+    @Test(expected = DuplicateCourseException.class)
+    public void test_add_courseWithDuplicateNameShouldThrowDuplicateCourseException() throws CourseDateException, CourseException, DuplicateCourseException {
+        Course valid = new Course(courseName,validStartDate,validEndDate);
+
+        sut = new School(name, openDate);
+        sut.addCourse(valid);
+        sut.addCourse(valid);
     }
 }
