@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Data.ToBeTestedTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2018-11-15T14:29:33" hostname="DESKTOP-SORM5I2" time="0.002">
-  <properties/>
-  <testcase name="test_ToBeTestedTest_FullNameShouldBeCorrect" classname="Data.ToBeTestedTest" time="0.002"/>
-  <testcase name="test_ToBeTestedTest_ShouldAssignNames" classname="Data.ToBeTestedTest" time="0.0"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
