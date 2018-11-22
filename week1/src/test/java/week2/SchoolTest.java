@@ -87,7 +87,7 @@ public class SchoolTest {
     }
 
     @Test
-    public void test_getNamesOfCourses_shouldReturnAListOfAllCourses() throws CourseDateException, CourseException, DuplicateCourseException {
+    public void test_getNamesOfCourses_shouldReturnAListOfAllCourseNames() throws CourseDateException, CourseException, DuplicateCourseException {
         sut = new School(name, openDate);
         assertThat(sut.getOpenDate(), equalTo(openDate));
         Course valid = new Course(courseName,validStartDate,validEndDate);
@@ -98,5 +98,19 @@ public class SchoolTest {
         assertThat(result.size(), equalTo(2));
         assertThat(result.get(0), equalTo(courseName));
         assertThat(result.get(1), equalTo(name));
+    }
+
+    @Test
+    public void test_getCourses_shouldReturnAListOfAllCourses() throws CourseDateException, CourseException, DuplicateCourseException {
+        sut = new School(name, openDate);
+        assertThat(sut.getOpenDate(), equalTo(openDate));
+        Course valid = new Course(courseName,validStartDate,validEndDate);
+        Course valid2 = new Course(name,validStartDate,validEndDate);
+        sut.addCourse(valid);
+        sut.addCourse(valid2);
+        ArrayList<Course> result = sut.getCourses();
+        assertThat(result.size(), equalTo(2));
+        assertThat(result.get(0), equalTo(valid));
+        assertThat(result.get(1), equalTo(valid2));
     }
 }
