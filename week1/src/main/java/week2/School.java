@@ -9,7 +9,8 @@ public class School {
     private Date openDate;
     private ArrayList<Course> courses;
 
-    public School(String name, Date openDate){
+    public School(String name, Date openDate) {
+        if (name == null || openDate == null) throw new IllegalArgumentException();
         this.name = name;
         this.openDate = openDate;
         this.courses = new ArrayList<>();
