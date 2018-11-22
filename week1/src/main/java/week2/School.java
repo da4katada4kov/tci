@@ -18,7 +18,7 @@ public class School {
 
     public void addCourse(Course course) throws CourseException, DuplicateCourseException {
         if(course.getStartDate().before(this.openDate)) throw new CourseException();
-        if (courses.stream().anyMatch((c -> c.getName().equals(c.getName())))) throw new DuplicateCourseException();
+        if (courses.stream().anyMatch((c -> c.getName().equals(course.getName())))) throw new DuplicateCourseException();
         courses.add(course);
     }
 
@@ -32,5 +32,9 @@ public class School {
 
     public ArrayList<Course> getCourses() {
         return courses;
+    }
+
+    public Course getCourseByName(String name) {
+        return courses.stream().filter((c) -> c.getName().equals(name)).findFirst().orElse(null);
     }
 }

@@ -62,4 +62,24 @@ public class SchoolTest {
         sut.addCourse(valid);
         sut.addCourse(valid);
     }
+
+    @Test
+    public void test_getCourseByName_shouldReturnNullWhenNoCourseIsFound() throws CourseDateException, CourseException, DuplicateCourseException {
+        sut = new School(name, openDate);
+        assertThat(sut.getOpenDate(), equalTo(openDate));
+
+        assertThat(sut.getCourseByName("no such"), equalTo(null));
+    }
+
+    @Test
+    public void test_getCourseByName_shouldReturnAFoundCourseByName() throws CourseDateException, CourseException, DuplicateCourseException {
+        sut = new School(name, openDate);
+        assertThat(sut.getOpenDate(), equalTo(openDate));
+        Course valid = new Course(courseName,validStartDate,validEndDate);
+        sut.addCourse(valid);
+        Course result = sut.getCourseByName(courseName);
+        assertThat(result.getName(), equalTo(courseName));
+        assertThat(result.getStartDate(), equalTo(validStartDate));
+        assertThat(result.getEndDate(), equalTo(validEndDate));
+    }
 }
