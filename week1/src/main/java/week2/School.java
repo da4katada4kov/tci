@@ -16,6 +16,10 @@ public class School {
         this.courses = new ArrayList<>();
     }
 
+    public void addCourse(Course course){
+        courses.add(course);
+    }
+
     public String getName() {
         return name;
     }
