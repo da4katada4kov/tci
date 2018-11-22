@@ -1,26 +1,26 @@
 package week2;
 
-import java.util.Date;
+import java.util.Calendar;
 
 public class Course {
 
     private String name;
-    private Date startDate;
-    private Date endDate;
+    private Calendar startDate;
+    private Calendar endDate;
 
 
-    public Course(String name, Date startDate, Date endDate) throws CourseDateException {
+    public Course(String name, Calendar startDate, Calendar endDate) throws CourseDateException {
         this.name = name;
         if (startDate.after(endDate)) throw new CourseDateException();
         this.startDate = startDate;
         this.endDate = endDate;
     }
 
-    public Date getEndDate() {
+    public Calendar getEndDate() {
         return endDate;
     }
 
-    public Date getStartDate() {
+    public Calendar getStartDate() {
         return startDate;
     }
 

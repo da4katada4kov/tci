@@ -1,16 +1,16 @@
 package week2;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.stream.Collectors;
 
 public class School {
 
     private String name;
-    private Date openDate;
+    private Calendar openDate;
     private ArrayList<Course> courses;
 
-    public School(String name, Date openDate) {
+    public School(String name, Calendar openDate) {
         if (name == null || openDate == null) throw new IllegalArgumentException();
         this.name = name;
         this.openDate = openDate;
@@ -27,7 +27,7 @@ public class School {
         return name;
     }
 
-    public Date getOpenDate() {
+    public Calendar getOpenDate() {
         return openDate;
     }
 
