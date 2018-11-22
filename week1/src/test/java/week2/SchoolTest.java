@@ -2,8 +2,10 @@ package week2;
 
 import org.junit.*;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -81,5 +83,20 @@ public class SchoolTest {
         assertThat(result.getName(), equalTo(courseName));
         assertThat(result.getStartDate(), equalTo(validStartDate));
         assertThat(result.getEndDate(), equalTo(validEndDate));
+        assertThat(sut.getNamesOfCourses().size(), equalTo(1));
+    }
+
+    @Test
+    public void test_getNamesOfCourses_shouldReturnAListOfAllCourses() throws CourseDateException, CourseException, DuplicateCourseException {
+        sut = new School(name, openDate);
+        assertThat(sut.getOpenDate(), equalTo(openDate));
+        Course valid = new Course(courseName,validStartDate,validEndDate);
+        Course valid2 = new Course(name,validStartDate,validEndDate);
+        sut.addCourse(valid);
+        sut.addCourse(valid2);
+        ArrayList<String> result = sut.getNamesOfCourses();
+        assertThat(result.size(), equalTo(2));
+        assertThat(result.get(0), equalTo(courseName));
+        assertThat(result.get(1), equalTo(name));
     }
 }

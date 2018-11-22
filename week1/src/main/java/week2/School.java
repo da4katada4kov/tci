@@ -2,6 +2,7 @@ package week2;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.stream.Collectors;
 
 public class School {
 
@@ -32,6 +33,10 @@ public class School {
 
     public ArrayList<Course> getCourses() {
         return courses;
+    }
+
+    public ArrayList<String> getNamesOfCourses() {
+        return (ArrayList<String>) courses.stream().map((c) -> c.getName()).collect(Collectors.toList());
     }
 
     public Course getCourseByName(String name) {
